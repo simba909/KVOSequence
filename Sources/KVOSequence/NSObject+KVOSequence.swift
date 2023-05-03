@@ -41,8 +41,8 @@ public extension NSObjectProtocol {
 
 extension NSObject.KeyValueSequence: AsyncSequence {
     public struct Element {
-        var newValue: Value?
-        var oldValue: Value?
+        public var newValue: Value?
+        public var oldValue: Value?
     }
 
     final public class AsyncIterator: AsyncIteratorProtocol {
