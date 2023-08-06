@@ -1,6 +1,6 @@
-import DequeModule
+@_implementationOnly import DequeModule
 
-struct StateMachine<Value> {
+struct StateMachine<Subject, Value> {
     typealias ObservationToken = AnyObject
     typealias SuspendedConsumer = UnsafeContinuation<Value?, Never>
 

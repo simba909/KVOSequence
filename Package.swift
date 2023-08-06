@@ -1,4 +1,4 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.8
 
 import PackageDescription
 
@@ -16,6 +16,9 @@ let package = Package(
             name: "KVOSequence",
             dependencies: [
                 .product(name: "DequeModule", package: "swift-collections"),
+            ],
+            swiftSettings: [
+                .enableExperimentalFeature("StrictConcurrency=complete"),
             ]
         ),
         .testTarget(name: "KVOSequenceTests", dependencies: ["KVOSequence"]),

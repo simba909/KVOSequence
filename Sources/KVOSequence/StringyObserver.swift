@@ -1,6 +1,6 @@
 import Foundation
 
-class StringyObserver<Subject, Value>: NSObject where Subject: NSObject {
+final class StringyObserver<Subject, Value>: NSObject where Subject: NSObject {
     struct ObservedChange {
         let kind: NSKeyValueObservedChange<Value>.Kind
         let newValue: Value?
@@ -9,13 +9,13 @@ class StringyObserver<Subject, Value>: NSObject where Subject: NSObject {
 
     let subject: Subject
     let keyPath: String
-    let changeHandler: (ObservedChange) -> Void
+    let changeHandler: @Sendable (ObservedChange) -> Void
 
     init(
         subject: Subject,
         keyPath: String,
         options: NSKeyValueObservingOptions,
-        changeHandler: @escaping (ObservedChange) -> Void
+        changeHandler: @escaping @Sendable (ObservedChange) -> Void
     ) {
         self.subject = subject
         self.keyPath = keyPath
@@ -48,3 +48,9 @@ class StringyObserver<Subject, Value>: NSObject where Subject: NSObject {
         changeHandler(observedChange)
     }
 }
+
+// MARK: Sendable
+
+extension StringyObserver.ObservedChange: Sendable where Value: Sendable {}
+
+extension StringyObserver: Sendable where Subject: Sendable, Value: Sendable {}
