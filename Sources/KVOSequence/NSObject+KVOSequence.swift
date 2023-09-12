@@ -25,7 +25,7 @@ public extension NSObject {
 public extension NSObjectProtocol {
     func sequence<Value>(
         for keyPath: KeyPath<Self, Value>,
-        options: NSKeyValueObservingOptions = []
+        options: NSKeyValueObservingOptions = [.initial, .new]
     ) -> NSObject.KeyValueSequence<Self, Value> {
         NSObject.KeyValueSequence(subject: self, keyPath: .static(keyPath), options: options)
     }
@@ -33,7 +33,7 @@ public extension NSObjectProtocol {
     func sequence<Value>(
         of value: Value.Type = Value.self,
         forKeyPath keyPath: String,
-        options: NSKeyValueObservingOptions = []
+        options: NSKeyValueObservingOptions = [.initial, .new]
     ) -> NSObject.KeyValueSequence<Self, Value> {
         NSObject.KeyValueSequence(subject: self, keyPath: .stringy(keyPath), options: options)
     }
