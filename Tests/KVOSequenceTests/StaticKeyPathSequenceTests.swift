@@ -12,26 +12,23 @@ final class StaticKeyPathSequenceTests: XCTestCase {
     }
 
     func testProducesValues() async throws {
-        let sequence = person.sequence(for: \.name, options: [.old, .new])
+        let sequence = person.sequence(for: \.name)
         let iterator = sequence.makeAsyncIterator()
 
         person.name = "Hika"
         var element = await iterator.next()
-        XCTAssertEqual(element?.newValue, "Hika")
+        XCTAssertEqual(element, "Hika")
 
         person.name = "Mai"
         element = await iterator.next()
-        XCTAssertEqual(element?.newValue, "Mai")
-        XCTAssertEqual(element?.oldValue, "Hika")
+        XCTAssertEqual(element, "Mai")
 
         person.name = nil
         element = await iterator.next()
 
         // Unfortunate, but double optional is messy...
-        if case let value?? = element?.newValue {
+        if case let value?? = element {
             XCTFail("Expected newValue to be nil, but was: \(value)")
         }
-
-        XCTAssertEqual(element?.oldValue, "Mai")
     }
 }
