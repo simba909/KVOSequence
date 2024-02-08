@@ -9,7 +9,7 @@ let package = Package(
         .library(name: "KVOSequence", targets: ["KVOSequence"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/apple/swift-collections", .upToNextMinor(from: "1.0.4")),
+        .package(url: "https://github.com/apple/swift-collections", .upToNextMajor(from: "1.0.4")),
     ],
     targets: [
         .target(
