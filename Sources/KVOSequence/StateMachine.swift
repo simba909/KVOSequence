@@ -1,4 +1,4 @@
-@_implementationOnly import DequeModule
+import DequeModule
 
 struct StateMachine<Subject, Value> {
     typealias ObservationToken = AnyObject
